@@ -31,9 +31,9 @@ Adversaries want to obtain the vault, the generated tokens, and the keys to gene
 
 The vault is stored locally, unless the user exports it to a different system. It reduces the chances of adversaries obtaining the vault.
 
-AEAD cipher [AES in GCM mode](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L30) with a [128-bit tag](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L32) is used to provide confidentiality, integrity, and authenticity of the master key, and the vault contents. Wrapper keys are used to protect the master key. The master key is used to protect the vault contents. The [256-bit keys](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L31) are [generated with a CSPRNG](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L112), and [96-bit nonces](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L33) are [generated with a CSPRNG as well](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L67).
+AEAD cipher [AES in GCM mode](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L30) with a [128-bit tag](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L32) is used to provide confidentiality, integrity, and authenticity of the master key, and the vault contents. Wrapper keys are used to protect the master key. The master key is used to protect the vault contents. The [256-bit keys](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L31) are [generated with a CSPRNG](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L112), and [96-bit nonces](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L33) are [generated with a CSPRNG as well](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L67).
 
-For key derivation, Scrypt with an [output length of 256 bits](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L31) is used with the following parameters: [N=2^15](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L35), [r=8](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L36), [p=1](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L37), and a [256-bit salt that is generated with a CSPRNG](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L122).
+For key derivation, Scrypt with an [output length of 256 bits](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L31) is used with the following parameters: [N=2^15](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L35), [r=8](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L36), [p=1](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L37), and a [256-bit salt that is generated with a CSPRNG](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/crypto/CryptoUtils.java#L122).
 
 PINs are not supported, as users may pick predictable ones, and the permutations are dangerously low, even with a 24-digit PIN. Making it trivial for adversaries to obtain the vault's contents.
 
@@ -42,7 +42,7 @@ Assuming an adversary can attempt 100,000 (which is not unreasonable considering
 
 #### Password
 
-When creating a vault, a new wrapper key is derived from the user provided password; a [generated salt](https://github.com/beemdevelopment/Aegis/blob/master/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L38) along with [N](https://github.com/beemdevelopment/Aegis/blob/master/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L35), [r](https://github.com/beemdevelopment/Aegis/blob/master/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L36), and [p](https://github.com/beemdevelopment/Aegis/blob/master/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L37) are [stored (JSON format)](https://github.com/beemdevelopment/Aegis/blob/09065c705b33bc52498733ca8a95362eb653b909/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L32) in the [password slot](https://github.com/beemdevelopment/Aegis/blob/master/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java), so it is possible to derive the _same_ wrapper key every time the user goes to unlock the vault.
+When creating a vault, a new wrapper key is derived from the user provided password; a [generated salt](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L38) along with [N](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L35), [r](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L36), and [p](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L37) are [stored (JSON format)](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java#L32) in the [password slot](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/PasswordSlot.java), so it is possible to derive the _same_ wrapper key every time the user goes to unlock the vault.
 
 ##### Slot
 
@@ -80,7 +80,7 @@ A new wrapper key and UUID(version 4) is generated, and put in Android's Key Sto
 
 ##### Slot
 
-The biometric slot is identical to the [raw slot](https://github.com/beemdevelopment/Aegis/blob/master/app/src/main/java/com/beemdevelopment/aegis/vault/slots/RawSlot.java). If `uuid`, `key`, `nonce`, or `tag` is modified, it is not possible to unlock the vault.
+The biometric slot is identical to the [raw slot](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/app/src/main/java/com/beemdevelopment/aegis/vault/slots/RawSlot.java). If `uuid`, `key`, `nonce`, or `tag` is modified, it is not possible to unlock the vault.
 
 ```json
 {
@@ -122,13 +122,13 @@ __NOTE:__ v1.1.4 is still using SpongyCastle, migration to Libsodium is in devel
 
 2. Scrypt has one parameter that scales for _both_ CPU _and_ memory cost. [Argon2](https://en.wikipedia.org/wiki/Argon2)__id__ is potentially a better KDF to since it resistant to side channel and TMTO attacks. Not only that, but it scales better with _imbalanced_ resources, such as little CPU _or_ memory due to having separate parameters for resources.
 
-[They are already aware](https://github.com/beemdevelopment/Aegis/blob/master/docs/vault.md#kdf):
+[They are already aware](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/docs/vault.md#kdf):
 
 > Argon2 is a more modern KDF that provides an advantage over scrypt because it allows tweaking the memory-hardness parameter and CPU-hardness parameter separately, whereas scrypt ties those together into one cost parameter (N). As many applications have started using Argon2 in production, it seems that it has withstood the test of time. It will be considered as an alternative option to switch to in the future.
 
 3. Use a AEAD cipher with a larger nonce size, or SIV.
 
-[They are already aware](https://github.com/beemdevelopment/Aegis/blob/master/docs/vault.md#aead):
+[They are already aware](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/docs/vault.md#aead):
 
 > Switching to a nonce misuse-resistant cipher like AES-GCM-SIV or a cipher with a larger (192 bits) nonce like XChaCha-Poly1305 will be explored in the future.
 
