@@ -1,8 +1,8 @@
-# (First  Draft) [Aegis Authenticator](https://getaegis.app/) v1.1.4
+# [Aegis Authenticator](https://getaegis.app/) [v1.1.4](https://github.com/beemdevelopment/Aegis/releases/tag/v1.1.4)
 
-A free, and open source Android 2FA application distributed on [F-Droid](https://f-droid.org/packages/com.beemdevelopment.aegis/), and [Google Play Store](play.google.com/store/apps/details?id=com.beemdevelopment.aegis).
+A **free**, [**open source**](https://github.com/beemdevelopment/Aegis/blob/v1.1.4/LICENSE), and **easy to use** Android 2FA application developed on [GitHub](https://github.com/beemdevelopment/Aegis/tree/v1.1.4). Distributed on [F-Droid](https://f-droid.org/packages/com.beemdevelopment.aegis/), and [Google Play Store](https://play.google.com/store/apps/details?id=com.beemdevelopment.aegis).
 
-Supports TOTP, HOTP, and Steam for token generation.
+Supports [TOTP](https://tools.ietf.org/html/rfc6238), [HOTP](https://tools.ietf.org/html/rfc4226), and Steam for token generation.
 
 Supports importing files from other 2FA apps: Aegis, AndOTP, FreeOTP, FreeOTP+, Google Authenticator, Steam, and WinAuth.
 
